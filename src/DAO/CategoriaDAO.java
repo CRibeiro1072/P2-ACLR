@@ -36,7 +36,7 @@ public class CategoriaDAO {
         try {
 
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, categoria. getCategoriaDescricao());
+            stmt.setString(1, categoria.getCategoriaDescricao());
             stmt.executeUpdate();
 
             return true;
