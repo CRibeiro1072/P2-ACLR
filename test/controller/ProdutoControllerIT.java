@@ -7,6 +7,7 @@ package controller;
 
 import java.sql.SQLException;
 import model.Categoria;
+import model.Marca;
 import model.Produto;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -20,18 +21,22 @@ public class ProdutoControllerIT {
     public ProdutoControllerIT() {
     }
 
-  @Test
- //   @Ignore
+  //@Test
+    @Ignore
     public void inserirProdutoController() throws SQLException {
         
         Categoria categoria = new Categoria(); 
         categoria.setCategoriaCodigo(1);
+        
+        Marca marca = new Marca();
+        marca.setMarcaCodigo(2);
         
         Produto produto = new Produto();
         produto.setProdutoDescricao("TV PHILCO 55PH7865");
         produto.setProdutoQuantidade(880);
         produto.setProdutoValor(137.0);
         produto.setProdutoCategoria(categoria);
+        produto.setProdutoMarca(marca);
 
         ProdutoController produtoController = new ProdutoController();
         
@@ -49,8 +54,8 @@ public class ProdutoControllerIT {
         for (Produto produto : produtoController.buscarProdutoController()) {
 
             System.out.println("Codigo: " + String.valueOf(produto.getProdutoCodigo()) + " Produto: " + produto.getProdutoDescricao()
-                    + " Codigo Categoria: " + produto.getProdutoCategoria().getCategoriaCodigo()
-                    + " Categoria: " + produto.getProdutoCategoria().getCategoriaDescricao());
+                    + " Categoria: " + produto.getProdutoCategoria().getCategoriaCodigo()
+                    + " Marca: " + produto.getProdutoMarca().getMarcaDescricao());
         }
     }
     

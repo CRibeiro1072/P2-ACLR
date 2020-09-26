@@ -32,7 +32,7 @@ public class ViewProduto extends javax.swing.JFrame {
     
     public ViewProduto() {
         initComponents();
-//Carrega as Categorias no Objeto cbxProdutoCategoria
+        //Carrega as Categorias e Marcas no Objetos cbxProdutoCategoria e cbxProdutoMarca
         CategoriaController categoriaController = new CategoriaController();
         MarcaController marcaController = new MarcaController();
         
@@ -319,7 +319,7 @@ public class ViewProduto extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    //Corrido dia 26/09/2020
     private void btnProdutoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoAdicionarActionPerformed
 
         Produto produto = new Produto();
@@ -329,15 +329,13 @@ public class ViewProduto extends javax.swing.JFrame {
         produto.setProdutoQuantidade(Integer.parseInt(txtProdutoQuantidade.getText()));
         produto.setProdutoValor(Double.parseDouble(txtProdutoValor.getText()));
      
-       
-       // Categoria categoria = (Categoria) cbxProdutoCategoria.getSelectedItem();
-       // produto.setProdutoCategoria(categoria);
         Categoria categoria = new Categoria(); 
-       // categoria.setCategoriaDescricao(cbxProdutoCategoria.getSelectedItem().toString());
-        categoria.setCategoriaCodigo(cbxProdutoCategoria.getSelectedIndex()-1);
-       // cmbAparelho.getSelectedIndex();
+        categoria.setCategoriaCodigo(cbxProdutoCategoria.getSelectedIndex()+1);
         produto.setProdutoCategoria(categoria);
         
+        Marca marca = new Marca(); 
+        marca.setMarcaCodigo(cbxProdutoMarca.getSelectedIndex()+1);
+        produto.setProdutoMarca(marca);        
 
         produtoController.inserirProdutoController(produto);
 
@@ -346,7 +344,6 @@ public class ViewProduto extends javax.swing.JFrame {
         txtProdutoQuantidade.setText("");
         txtProdutoValor.setText("");
 
-        //Atualiza tabela (grid)
         atualizarTabela();
     }//GEN-LAST:event_btnProdutoAdicionarActionPerformed
 
@@ -365,23 +362,15 @@ public class ViewProduto extends javax.swing.JFrame {
                 produto.getProdutoDescricao(),
                 produto.getProdutoQuantidade(),
                 produto.getProdutoValor(),
-                produto.getProdutoCategoria().getCategoriaCodigo(),
+               // produto.getProdutoCategoria().getCategoriaCodigo(),
                 produto.getProdutoCategoria().getCategoriaDescricao(),
-              //  produto.getProdutoMarca().getMarcaDescricao()
+                produto.getProdutoMarca().getMarcaDescricao()
 
             });
 
         }
 
     }
-    
-	public void carregarCbxCategoria()
-	{
-		for(int i = 0; i < ListaCategoria.size(); i ++)
-		{
-		//  cbxProdutoCategoria.addItem(ListaCategoria.get(i));
-		}
-	}    
     
     
     private void btnProdutoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoExcluirActionPerformed
@@ -391,7 +380,6 @@ public class ViewProduto extends javax.swing.JFrame {
             Produto produto = new Produto();
             ProdutoController produtoController = new ProdutoController();
             
-            //excluir categoria no BD
             produto.setProdutoCodigo((int)jtProduto.getValueAt(jtProduto.getSelectedRow(), 0));
             
             produtoController.excluirProdutoController(produto);
@@ -419,15 +407,15 @@ public class ViewProduto extends javax.swing.JFrame {
             produto.setProdutoValor(Double.parseDouble(txtProdutoValor.getText()));
             
             Categoria categoria = new Categoria(); 
-            categoria.setCategoriaCodigo(cbxProdutoCategoria.getSelectedIndex());
+            categoria.setCategoriaCodigo(cbxProdutoCategoria.getSelectedIndex()+1);
+            produto.setProdutoCategoria(categoria);
+            
+            Marca marca = new Marca(); 
+            marca.setMarcaCodigo(cbxProdutoMarca.getSelectedIndex()+1);
+            produto.setProdutoMarca(marca);
+            
             produto.setProdutoCategoria(categoria);
         
-
-            produtoController.inserirProdutoController(produto);
-            
-      //      Categoria categoria = (Categoria) cbxProdutoCategoria.getSelectedItem();
-        //    produto.setProdutoCategoria(categoria);
-            
             produto.setProdutoCodigo((int) jtProduto.getValueAt(jtProduto.getSelectedRow(), 0));
             
             produtoController.atualizarProdutoController(produto);
@@ -458,7 +446,6 @@ public class ViewProduto extends javax.swing.JFrame {
                 produto.getProdutoDescricao(),
                 produto.getProdutoQuantidade(),
                 produto.getProdutoValor(),
-               // produto.getProdutoCategoria().getCategoriaCodigo(),
                 produto.getProdutoCategoria().getCategoriaDescricao(),
                 produto.getProdutoMarca().getMarcaDescricao()
             });
@@ -488,13 +475,23 @@ public class ViewProduto extends javax.swing.JFrame {
 
     private void jtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProdutoKeyReleased
         if (jtProduto.getSelectedRow() != -1) {
-            txtProdutoCodigo.setText(jtProduto.getValueAt(jtProduto.getSelectedRow(), 0).toString());
-            txtProdutoDescricao.setText(jtProduto.getValueAt(jtProduto.getSelectedRow(), 1).toString());
-            txtProdutoQuantidade.setText(jtProduto.getValueAt(jtProduto.getSelectedRow(), 2).toString());
-            txtProdutoValor.setText(jtProduto.getValueAt(jtProduto.getSelectedRow(), 3).toString());
-          //  cbxProdutoCategoria.addItem(jtProduto.getValueAt(jtProduto.getSelectedRow(), 5).toString());
-          //  cbxProdutoCategoria.getSelectedIndex()-1);
-
+            txtProdutoCodigo.setText(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 0).toString());
+            
+            txtProdutoDescricao.setText(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 1).toString());
+            
+            txtProdutoQuantidade.setText(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 2).toString());
+            
+            txtProdutoValor.setText(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 3).toString());
+            
+            cbxProdutoCategoria.setSelectedItem(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 4).toString());
+            
+            cbxProdutoMarca.setSelectedItem(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 5).toString());
         }
     }//GEN-LAST:event_jtProdutoKeyReleased
 
@@ -505,7 +502,7 @@ public class ViewProduto extends javax.swing.JFrame {
     private void jtProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProdutoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtProdutoKeyTyped
-
+    //Corrigido dia 26/09/2020
     private void jtProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProdutoMouseClicked
         if (jtProduto.getSelectedRow() != -1) {
            
@@ -521,9 +518,11 @@ public class ViewProduto extends javax.swing.JFrame {
             txtProdutoValor.setText(jtProduto.getValueAt(
                     jtProduto.getSelectedRow(), 3).toString());
   
-         //   cbxProdutoCategoria.addItem(jtProduto.getValueAt(
-           //         jtProduto.getSelectedRow(), 5).toString());
-
+            cbxProdutoCategoria.setSelectedItem(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 4).toString());
+            
+            cbxProdutoMarca.setSelectedItem(jtProduto.getValueAt(
+                    jtProduto.getSelectedRow(), 5).toString());
         }
     }//GEN-LAST:event_jtProdutoMouseClicked
 

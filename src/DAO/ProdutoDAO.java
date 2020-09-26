@@ -28,15 +28,15 @@ public class ProdutoDAO {
 
         con = ConnectionDB.getConnection();
     }
-
+    //Corrigido dia 25/09/2020
     public boolean inserirProdutoDAO(Produto produto) {
 
         String sql = "INSERT INTO produto (produtoDescricao, "
                 + "produtoQuantidade, "
                 + "produtoValor, "
-                + "produtoCategoria) "
+                + "produtoCategoria, "
                 + "produtoMarca) "
-                + "values (?, ?, ?, ?)";
+                + "values (?, ?, ?, ?, ?)";
 
         PreparedStatement stmt = null;
 
@@ -64,20 +64,13 @@ public class ProdutoDAO {
         }
 
     }
-
+    //Corrigido dia 25/09/2020
     public List<Produto> buscarProdutosDAO() {
+        
         String sql = " SELECT p.produtoCodigo, p.produtoDescricao, p.produtoQuantidade, "
-                + " p.produtoValor, "
-                + " c.categoriaDescricao FROM produto p INNER JOIN categoria c "
-                + " ON p.produtoCategoria = c.categoriaCodigo "
+                + " p.produtoValor, c.categoriaDescricao, m.marcaDescricao "
+                + " FROM produto p INNER JOIN categoria c ON p.produtoCategoria = c.categoriaCodigo "
                 + " INNER JOIN marca m ON p.produtoMarca = m.marcaCodigo ";
-       // String sql = "SELECT * FROM vw_ProdutoPesquisar";
-        /* String sql = " SELECT p.produtoCodigo, p.produtoDescricao, p.produtoQuantidade, "
-                + " p.produtoValor, p.produtoCategoria, c.categoriaMarca, "
-                + " c.categoriaDescricao FROM produto p INNER JOIN categoria c "
-                + " ON p.produtoCategoria = c.categoriaCodigo ";*/
-         
-//System.out.println(sql);
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -92,16 +85,12 @@ public class ProdutoDAO {
             while (rs.next()) {
 
                 Produto produto = new Produto();
-
-                //produto.setProdutoCodigo(rs.getInt("produtoCodigo"));
-                //produto.setProdutoDescricao(rs.getString("produtoDescricao"));
                 produto.setProdutoCodigo(rs.getInt(Produto.PRODUTO_CODIGO));
                 produto.setProdutoDescricao(rs.getString(Produto.PRODUTO_DESCRICAO));
                 produto.setProdutoQuantidade(rs.getInt(Produto.PRODUTO_QUANTIDADE));
                 produto.setProdutoValor(rs.getDouble(Produto.PRODUTO_VALOR));
                 
                 Categoria categoria = new Categoria();
-              //  categoria.setCategoriaCodigo(rs.getInt(Categoria.CATEGORIA_CODIGO));
                 categoria.setCategoriaDescricao(rs.getString(Categoria.CATEGORIA_DESCRICAO));
                 
                 Marca marca = new Marca();
@@ -123,16 +112,22 @@ public class ProdutoDAO {
         return produtoLista;
 
     }
-
+    //Corrigido dia 26/09/2020
     public List<Produto> buscarProdutosDAOComLike(String produtoDescricao) {
-
-       // String sql = "SELECT * FROM vw_ProdutoPesquisar WHERE produtoDescricao LIKE ?";
         
-        String sql = " SELECT p.produtoCodigo, p.produtoDescricao, p.produtoQuantidade, "
+      //    String sql = " SELECT * FROM produto WHERE produtoDescricao LIKE ? ";
+        
+            String sql = " SELECT p.produtoCodigo, p.produtoDescricao, p.produtoQuantidade, "
+                + " p.produtoValor, c.categoriaDescricao, m.marcaDescricao "
+                + " FROM produto p INNER JOIN categoria c ON p.produtoCategoria = c.categoriaCodigo "
+                + " INNER JOIN marca m ON p.produtoMarca = m.marcaCodigo "
+                + " WHERE p.produtoDescricao LIKE ? ORDER BY p.produtoDescricao ";
+
+     /*   String sql = " SELECT p.produtoCodigo, p.produtoDescricao, p.produtoQuantidade, "
                 + " p.produtoValor, p.produtoCategoria, c.categoriaCodigo, "
                 + " c.categoriaDescricao FROM produto p INNER JOIN categoria c "
                 + " ON p.produtoCategoria = c.categoriaCodigo "
-                + " INNER JOIN marca m ON p.produtoMarca = m.marcaCodigo ";
+                + " INNER JOIN marca m ON p.produtoMarca = m.marcaCodigo ";*/
          
 
         PreparedStatement stmt = null;
@@ -156,12 +151,10 @@ public class ProdutoDAO {
                 produto.setProdutoValor(rs.getDouble(Produto.PRODUTO_VALOR));
 
                 Categoria categoria = new Categoria();
-              //  categoria.setCategoriaCodigo(rs.getInt(Categoria.CATEGORIA_CODIGO));
                 categoria.setCategoriaDescricao(rs.getString(Categoria.CATEGORIA_DESCRICAO));
                 
                 Marca marca = new Marca();
                 marca.setMarcaDescricao(rs.getString(Marca.MARCA_DESCRICAO));
-              //  categoria.setCategoriaDescricao(rs.getString(Categoria.CATEGORIA_DESCRICAO));
 
                 produto.setProdutoCategoria(categoria);
                 produto.setProdutoMarca(marca);
@@ -176,10 +169,10 @@ public class ProdutoDAO {
             ConnectionDB.closeConnection(con, stmt, rs);
         }
 
-        return produtoLista;
+        return produtoLista; 
 
     }
-
+    //Corrigido dia 25/09/2020
     public boolean atualizarProdutoDAO(Produto produto) {
 
         String sql = "UPDATE produto SET produtoDescricao = ?, produtoQuantidade = ?, produtoValor = ?, produtoCategoria = ?, produtoMarca = ? WHERE produtoCodigo = ?";
@@ -193,7 +186,8 @@ public class ProdutoDAO {
             stmt.setInt(2, produto.getProdutoQuantidade());
             stmt.setDouble(3, produto.getProdutoValor());
             stmt.setInt(4, produto.getProdutoCategoria().getCategoriaCodigo());
-            stmt.setInt(5, produto.getProdutoCodigo());
+            stmt.setInt(5, produto.getProdutoMarca().getMarcaCodigo());
+            stmt.setInt(6, produto.getProdutoCodigo());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso.");

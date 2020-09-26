@@ -83,11 +83,11 @@ public class ViewCategoria extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Descricao", "Abreviatura"
+                "Codigo", "Descricao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

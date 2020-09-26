@@ -40,7 +40,7 @@ public class CategoriaDAOTest {
      * Test of buscarCategoriasDAO method, of class CategoriaDAO.
      * @throws java.sql.SQLException
      */
-    @Test
+   // @Test
     //@Ignore
     public void testBuscarCategoriasDAO() throws SQLException{
         CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -99,12 +99,12 @@ public class CategoriaDAOTest {
     /**
      * Test of buscarCategoriasComLikeDAO method, of class CategoriaDAO.
      */
-   // @Test
-    @Ignore
+    @Test
+    //@Ignore
     public void testBuscarCategoriasComLikeDAO() throws SQLException {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         
-        for(Categoria categoria : categoriaDAO.buscarCategoriasComLikeDAO("Linha")){
+        for(Categoria categoria : categoriaDAO.buscarCategoriasComLikeDAO("1")){
             System.out.println("Codigo: "+String.valueOf(categoria.getCategoriaCodigo())+
                     " Categoria: "+ categoria.getCategoriaDescricao());
         }
