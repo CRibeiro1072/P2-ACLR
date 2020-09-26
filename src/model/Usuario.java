@@ -9,6 +9,8 @@ package model;
  *
  * @author claudinei
  */
+
+//Add comentário por Romildo Jr (Testando Git)
 public class Usuario {
     public static final String USUARIO_CODIGO = "usuarioCodigo";
     public static final String USUARIO_NOME = "usuarioNome";
