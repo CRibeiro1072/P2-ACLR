@@ -83,7 +83,7 @@ public class ViewProduto extends javax.swing.JFrame {
 
         jMenu1.setText("jMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro e Manutenção de Produtos");
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -184,6 +184,12 @@ public class ViewProduto extends javax.swing.JFrame {
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
+            }
+        });
+
+        cbxProdutoCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProdutoCategoriaActionPerformed(evt);
             }
         });
 
@@ -543,6 +549,10 @@ public class ViewProduto extends javax.swing.JFrame {
     private void txtProdutoValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProdutoValorActionPerformed
+
+    private void cbxProdutoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProdutoCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProdutoCategoriaActionPerformed
 
     /**
      * @param args the command line arguments

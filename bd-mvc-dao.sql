@@ -121,12 +121,14 @@ create table venda(
     vendaDataVenda varchar(15),
     vendaSituacao int not null,
     vendaEnderecoEntrega int not null, 
+    vendaProduto int not null,
     constraint fk_nom_cliente foreign key(vendaCliente) REFERENCES cliente(clienteCodigo),
-    constraint fk_end_entrega_cliente foreign key(vendaEnderecoEntrega) REFERENCES endereco(enderecoCodigo)
+    constraint fk_end_entrega_cliente foreign key(vendaEnderecoEntrega) REFERENCES endereco(enderecoCodigo),
+    constraint fk_ven_produto foreign key(vendaProduto) REFERENCES produto(produtoCodigo)
 );
 -- Popula tabela venda
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (1, '01/01/2020', 2, 3);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (3, '05/02/2020', 5, 1);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (2, '10/03/2020', 3, 4);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (5, '11/04/2020', 1, 2);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (4, '23/05/2020', 4, 5);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (1, '01/01/2020', 2, 3, 1);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (3, '05/02/2020', 5, 1, 2);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (2, '10/03/2020', 3, 4, 2);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (5, '11/04/2020', 1, 2, 3);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (4, '23/05/2020', 4, 5, 3);
