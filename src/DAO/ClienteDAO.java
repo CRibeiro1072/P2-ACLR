@@ -16,7 +16,7 @@ import model.Cliente;
 
 /**
  *
- * @author romildo
+ * @author Araí
  */
 public class ClienteDAO {
     
