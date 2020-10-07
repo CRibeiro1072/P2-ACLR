@@ -10,11 +10,11 @@ package model;
  * @author claudinei
  */
 public class Venda {
-    public static final String ENDERECO_CODIGO = "vendaCodigo";
-    public static final String ENDERECO_CLIENTE = "vendaCliente";
-    public static final String ENDERECO_DESCRICAO = "vendaDataVenda";
-    public static final String ENDERECO_LOGRADOURO = "vendaSituacao";
-    public static final String ENDERECO_NUMERO = "vendaEnderecoEntrega";
+    public static final String VENDA_CODIGO = "vendaCodigo";
+    public static final String VENDA_CLIENTE = "vendaCliente";
+    public static final String VENDA_DATA = "vendaDataVenda";
+    public static final String VENDA_SITUACAO = "vendaSituacao";
+    public static final String VENDA_ENDERECO_ENTREGA = "vendaEnderecoEntrega";
     
     private int vendaCodigo;
     private Cliente vendaCliente;
