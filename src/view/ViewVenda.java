@@ -22,7 +22,7 @@ public class ViewVenda extends javax.swing.JFrame {
     /**
      * Creates new form ViewVenda
      */
-    public ViewVenda() {       
+    public ViewVenda() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
         this.viewNovaVenda.setVisible(true);
