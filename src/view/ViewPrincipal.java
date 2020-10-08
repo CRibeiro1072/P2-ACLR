@@ -97,6 +97,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jButton5.setText("Clientes");
 
         jButton6.setText("Usuários");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jBSair.setText("Sair");
         jBSair.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +195,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewMarca viewMarca = new ViewMarca();
         viewMarca.setVisible(true);
     }//GEN-LAST:event_jBMarcasActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+            
+        ViewUsuario viewUsuario = new ViewUsuario();
+        viewUsuario.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
