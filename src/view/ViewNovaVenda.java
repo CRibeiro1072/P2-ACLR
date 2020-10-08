@@ -17,7 +17,7 @@ import model.Cliente;
  * @author romildo
  */
 public class ViewNovaVenda extends javax.swing.JDialog {
-    private int idVenda;
+    private int idVenda = -1;
     private int clienteSelecionado = -1;
 
     /**
@@ -29,7 +29,7 @@ public class ViewNovaVenda extends javax.swing.JDialog {
         initComponents();
         
         VendaController venda = new VendaController(); 
-        idVenda = venda.iniciarVenda();
+        this.setIdVenda(venda.iniciarVenda());
         //System.out.println(idVenda);
         txtIdVenda.setText(String.valueOf(this.getIdVenda()));
         
@@ -124,6 +124,11 @@ public class ViewNovaVenda extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jtCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtClienteMouseClicked(evt);
+            }
+        });
         jtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtClienteKeyReleased(evt);
@@ -193,12 +198,13 @@ public class ViewNovaVenda extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,18 +220,22 @@ public class ViewNovaVenda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtClienteKeyReleased
-        if (jtCliente.getSelectedRow() != -1) {
-            setClienteSelecionado(Integer.parseInt(jtCliente.getValueAt(jtCliente.getSelectedRow(), 0).toString()));
-        }
+        
     }//GEN-LAST:event_jtClienteKeyReleased
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if(getClienteSelecionado() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione um cliente para continuar...");
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para continuar... " + this.getClienteSelecionado());
         }else{
             this.dispose();
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void jtClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtClienteMouseClicked
+        if (jtCliente.getSelectedRow() != -1) {
+            this.setClienteSelecionado(Integer.parseInt(jtCliente.getValueAt(jtCliente.getSelectedRow(), 0).toString()));            
+        }
+    }//GEN-LAST:event_jtClienteMouseClicked
 
     /**
      * @param args the command line arguments

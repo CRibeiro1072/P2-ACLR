@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ClienteController;
 import controller.VendaController;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ public class ViewVenda extends javax.swing.JFrame {
     private int idVenda = -1;
     private ViewSetQtdProduto viewSetQtdProduto;
     private ViewNovaVenda viewNovaVenda;
+    private int idCliente;
+    private VendaController venda;
     
     //private Venda venda;
     /**
@@ -26,19 +29,25 @@ public class ViewVenda extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
         this.viewNovaVenda.setVisible(true);
-        
-        
-        if(viewNovaVenda.getClienteSelecionado() != -1){                        
+        this.venda = new VendaController();
+        ClienteController cliente = new ClienteController();
+               
+        if(viewNovaVenda.getClienteSelecionado() == -1){                        
             
+            this.setIdVenda(viewNovaVenda.getIdVenda());
+            this.dispose();
+        
+        }else{
             initComponents();
-
+            
+            this.setIdCliente(viewNovaVenda.getClienteSelecionado());
+            
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
             setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
             setResizable(false); // Retira o botão de Maximizar
-        
-        }else{
-            this.setIdVenda(viewNovaVenda.getIdVenda());
-            this.dispose();
+            
+            this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
+//            System.out.println(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
         }
     }
 
@@ -64,7 +73,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        txtAviso = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -167,9 +176,8 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel7.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("CAIXA LIVRE");
+        txtAviso.setFont(new java.awt.Font("Verdana", 1, 28)); // NOI18N
+        txtAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -177,19 +185,19 @@ public class ViewVenda extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(txtAviso, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel5.setText("Avisos");
+        jLabel5.setText("Cliente");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -494,7 +502,7 @@ public class ViewVenda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {               
-                new ViewVenda().setVisible(true);                              
+                new ViewVenda().setVisible(true);                   
             }
         });
     }
@@ -509,7 +517,6 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -523,6 +530,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable jtItens;
+    private javax.swing.JLabel txtAviso;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtQtd;
     // End of variables declaration//GEN-END:variables
@@ -538,4 +546,18 @@ public class ViewVenda extends javax.swing.JFrame {
    public int getIdVenda(){
        return this.idVenda;
    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 }
