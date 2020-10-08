@@ -162,14 +162,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVenderActionPerformed
-        ViewVenda viewVenda = new ViewVenda();
+        ViewVenda viewVenda = new ViewVenda();   
         viewVenda.setVisible(true);
         
-        if(viewVenda.getIdVenda() != -1){
+        if(viewVenda.getIdVenda() == -1){
             VendaController venda = new VendaController();
-            venda.anulada(viewVenda.getIdVenda());
+            venda.anulada(viewVenda.getIdVenda());                        
         }
-        viewVenda.setVisible(false);
     }//GEN-LAST:event_jBVenderActionPerformed
 
     private void jBProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProdutosActionPerformed

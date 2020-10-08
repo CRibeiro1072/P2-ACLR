@@ -16,7 +16,7 @@ import model.Cliente;
 
 /**
  *
- * @author Araí
+ * @author Romildo
  */
 public class ClienteDAO {
     
@@ -102,5 +102,37 @@ public class ClienteDAO {
         return clienteLista;
 
     }    
+
+    public String getNomeCliente(int id) {
+        ResultSet rs = null;
+        
+        String sql = "SELECT clienteNome AS nome FROM cliente WHERE clienteCodigo = ?";
+        
+        String nome = "";
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);          
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();                        
+            
+            if(rs.next()){
+                nome = rs.getString("nome");
+            }
+            
+            return nome;
+
+        } catch (SQLException ex) {
+            String error = "Erro getNomeCliente: " + ex;
+            return error;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+    }
 }
    

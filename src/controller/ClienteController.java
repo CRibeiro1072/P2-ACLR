@@ -27,4 +27,9 @@ public class ClienteController {
         return clienteDAO.buscarClienteComLikeDAO(clienteNome);
     }
     
+    public String getNomeCliente(int id){
+        ClienteDAO cliente = new ClienteDAO();  
+        
+        return cliente.getNomeCliente(id);
+    }
 }
