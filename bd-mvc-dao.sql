@@ -81,11 +81,11 @@ create table cliente(
     clienteDtNascimento date
 );
 -- Popula a tabela cliente
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 1', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente1@gmail.com', '01/01/2020');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 2', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente2@gmail.com', '02/02/2020');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 3', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente3@gmail.com', '03/03/2020');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 4', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente4@gmail.com', '04/04/2020');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 5', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente5@gmail.com', '05/05/2020');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 1', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente1@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 2', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente2@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 3', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente3@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 4', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente4@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 5', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente5@gmail.com', '2020-10-05');
 
 -- Cria a tabela endereco
 create table endereco(
@@ -116,18 +116,26 @@ insert into endereco (enderecoCliente, enderecoDescricao, enderecoLogradouro, en
 -- Cria a tabela venda
 create table venda(
     vendaCodigo int primary key not null auto_increment,
-    vendaCliente int not null,
-    vendaDataVenda varchar(15),
-    vendaSituacao int not null,
-    vendaEnderecoEntrega int not null, 
-    vendaProduto int not null,
+    vendaCliente int,
+    vendaDataVenda date,
+    vendaSituacao int,
+    vendaEnderecoEntrega int, 
     constraint fk_nom_cliente foreign key(vendaCliente) REFERENCES cliente(clienteCodigo),
-    constraint fk_end_entrega_cliente foreign key(vendaEnderecoEntrega) REFERENCES endereco(enderecoCodigo),
-    constraint fk_ven_produto foreign key(vendaProduto) REFERENCES produto(produtoCodigo)
+    constraint fk_end_entrega_cliente foreign key(vendaEnderecoEntrega) REFERENCES endereco(enderecoCodigo)
 );
 -- Popula tabela venda
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (1, '01/01/2020', 2, 3, 1);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (3, '05/02/2020', 5, 1, 2);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (2, '10/03/2020', 3, 4, 2);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (5, '11/04/2020', 1, 2, 3);
-insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega, vendaProduto) values (4, '23/05/2020', 4, 5, 3);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (1, '2020-10-05', 2, 3);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (3, '2020-10-05', 5, 1);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (2, '2020-10-05', 3, 4);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (5, '2020-10-05', 1, 2);
+insert into venda (vendaCliente, vendaDataVenda, vendaSituacao, vendaEnderecoEntrega) values (4, '2020-10-05', 4, 5);
+
+create table venda_produto(
+	vendaCodigo int not null,
+    produtoCodigo int not null,
+    qtd int not null,
+    total numeric(5,2),
+    constraint fk_venda_produto_venda foreign key(vendaCodigo) references venda(vendaCodigo),
+    constraint fk_venda_produto_produto foreign key(produtoCodigo) references produto(produtoCodigo),
+    primary key(vendaCodigo, produtoCodigo)
+);

@@ -231,5 +231,90 @@ public class ProdutoDAO {
         }
 
     }
+    
+    public Produto buscaProduto(int id){
+        String sql = "SELECT produtoCodigo, produtoDescricao, produtoValor FROM produto WHERE produtoCodigo = ?";
 
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        Produto produto = new Produto();
+
+        try {
+
+            stmt = con.prepareStatement(sql);   
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery(); 
+            
+            if(rs.next()){
+                produto.setProdutoCodigo(rs.getInt("produtoCodigo"));
+                produto.setProdutoDescricao(rs.getString("produtoDescricao"));
+                produto.setProdutoValor(rs.getFloat("produtoValor"));
+            }
+            
+            return produto;
+
+        } catch (SQLException ex) {
+            System.err.println("ERRO buscaProdutoDAO: " + ex); 
+            
+            return produto;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+
+    }
+    
+    public boolean addProdutoVenda(int idProduto, int idVenda, int qtd, float valor, float total){
+        String sql = "INSERT INTO venda_produto (vendaCodigo, produtoCodigo, qtd, total) values (?, ?, ?, ?)";
+        
+        String sql_consulta = "SELECT * FROM venda_produto WHERE vendaCodigo = ? AND produtoCodigo = ?";
+        
+        String sql_atualiza_qtd = "UPDATE venda_produto SET qtd = qtd+?, total = total+(?*?) WHERE vendaCodigo = ? AND produtoCodigo = ?";
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            
+            stmt = con.prepareStatement(sql_consulta);
+            stmt.setInt(1, idVenda);
+            stmt.setInt(2, idProduto);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                stmt = con.prepareStatement(sql_atualiza_qtd);
+                stmt.setInt(1, qtd);     
+                stmt.setFloat(2, valor);
+                stmt.setFloat(3, qtd);
+                stmt.setInt(4, idVenda);
+                stmt.setInt(5, idProduto);                
+//                stmt.setFloat(4, total);
+                stmt.executeUpdate();
+                
+                return true;
+            }else{
+
+                stmt = con.prepareStatement(sql);
+                stmt.setInt(1, idVenda);
+                stmt.setInt(2, idProduto);
+                stmt.setInt(3, qtd);      
+                stmt.setFloat(4, total);
+                stmt.executeUpdate();
+                        
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro addProdutoVendaDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+    }
 }
