@@ -81,6 +81,19 @@ public class ProdutoController {
                     + "atualizarProdutoController");
         }
     }
+    
+    public Produto buscaProduto(int id){
+        ProdutoDAO produto = new ProdutoDAO();
+        
+        return produto.buscaProduto(id);
+        
+    }
+    
+    public boolean addProdutoVenda(int idProduto, int idVenda, int qtd, float valor, float total){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        
+        return produtoDAO.addProdutoVenda(idProduto, idVenda, qtd, valor, total);
+    }
 
     
 }
