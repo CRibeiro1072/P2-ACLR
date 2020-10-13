@@ -29,4 +29,10 @@ public class VendaController {
         
     }
     
+    public boolean setCliente(int idVenda, int idCliente) {
+        VendaDAO venda = new VendaDAO();
+        
+        return venda.setCliente(idVenda, idCliente);
+    }
+    
 }

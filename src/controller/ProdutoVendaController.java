@@ -6,6 +6,8 @@
 package controller;
 
 import DAO.ProdutoVendaDAO;
+import java.util.List;
+import model.ProdutoVenda;
 
 /**
  *
@@ -17,9 +19,14 @@ public class ProdutoVendaController {
         
     }
     
-    public void listarItensVenda(){
+    public List<ProdutoVenda> listarItensVenda(int idVenda){
         ProdutoVendaDAO produtoVenda = new ProdutoVendaDAO();
-        produtoVenda.listarItensVenda();
+        return produtoVenda.listarItensVenda(idVenda);        
+    }
+    
+    public float subtotal(int idVenda){
+        ProdutoVendaDAO produtoVenda = new ProdutoVendaDAO();
+        return produtoVenda.subtotal(idVenda);
     }
     
     
