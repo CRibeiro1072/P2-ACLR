@@ -7,7 +7,7 @@ package view;
 
 import DAO.UsuarioDAO;
 import javax.swing.JOptionPane;
-import view.beans_usuario;
+
 
 /**
  *
@@ -18,7 +18,6 @@ public class ViewUsuario extends javax.swing.JFrame {
     private Object jPasswordFiledSenha;
 
    
-    beans_usuario mod = new beans_usuario();
     UsuarioDAO dao = new UsuarioDAO();
     
     
