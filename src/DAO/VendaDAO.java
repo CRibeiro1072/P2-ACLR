@@ -94,7 +94,32 @@ public class VendaDAO {
             return true;
 
         } catch (SQLException ex) {
-            System.err.println("Erro excluir venda nula: " + ex);
+            System.err.println("Erro anuladaDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+    }
+    
+    public boolean setCliente(int idVenda, int idCliente) {
+        String sql = "UPDATE venda SET vendaCliente = ? WHERE vendaCodigo = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idCliente);
+            stmt.setInt(2, idVenda);
+            stmt.execute();                       
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.err.println("Erro iniciarVendaDAO: " + ex);
             return false;
 
         } finally {

@@ -8,10 +8,12 @@ package view;
 import controller.ClienteController;
 import controller.ProdutoController;
 import controller.VendaController;
+import controller.ProdutoVendaController;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+import model.ProdutoVenda;
 
 /**
  *
@@ -36,8 +38,7 @@ public class ViewVenda extends javax.swing.JFrame {
         this.venda = new VendaController();
         ClienteController cliente = new ClienteController();       
                
-        if(viewNovaVenda.getClienteSelecionado() == -1){                        
-            
+        if(viewNovaVenda.getClienteSelecionado() == -1){                                    
 //            this.setIdVenda(viewNovaVenda.getIdVenda());
             this.dispose();
         
@@ -47,12 +48,16 @@ public class ViewVenda extends javax.swing.JFrame {
             this.setIdCliente(viewNovaVenda.getClienteSelecionado());
             this.setIdVenda(viewNovaVenda.getIdVenda());
             
+            this.venda.setCliente(this.idVenda, this.idCliente);
+            
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
             setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
             setResizable(false); // Retira o botão de Maximizar
             
             this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
             this.txtIdVenda.setText("# "+this.getIdVenda());
+            
+            atualizarTabela();
 //            System.out.println(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
         }
     }
@@ -85,7 +90,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtItens = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtSubtotal = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtIdVenda = new javax.swing.JLabel();
@@ -310,11 +315,11 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
         jLabel12.setText("Subtotal");
 
-        jTextField4.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtSubtotal.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
+        txtSubtotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSubtotal.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField4FocusGained(evt);
+                txtSubtotalFocusGained(evt);
             }
         });
 
@@ -333,7 +338,7 @@ public class ViewVenda extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtSubtotal, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -358,7 +363,7 @@ public class ViewVenda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(12, 12, 12)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -479,11 +484,13 @@ public class ViewVenda extends javax.swing.JFrame {
                 System.out.printf("%d - %d - %d - %f - %f", produto.getProdutoCodigo(), this.idVenda, Integer.parseInt(this.txtQtd.getText()), Float.parseFloat(this.txtValorUnitario.getText()), Float.parseFloat(this.txtTotal.getText()));
                 buscaProduto.addProdutoVenda(produto.getProdutoCodigo(), this.idVenda, Integer.parseInt(this.txtQtd.getText()), Float.parseFloat(this.txtValorUnitario.getText()), Float.parseFloat(this.txtTotal.getText()));
                 
+                atualizarTabela();
+                
                 // Limpar os txt da View Venda
                 this.txtCodigo.setText("");
                 this.txtQtd.setText("1");
-                this.txtValorUnitario.setText("");
-                this.txtTotal.setText("");
+//                this.txtValorUnitario.setText("");
+//                this.txtTotal.setText("");
             }
         }
     }//GEN-LAST:event_txtCodigoKeyPressed
@@ -504,9 +511,9 @@ public class ViewVenda extends javax.swing.JFrame {
         this.txtCodigo.requestFocus();
     }//GEN-LAST:event_txtTotalFocusGained
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+    private void txtSubtotalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubtotalFocusGained
         this.txtCodigo.requestFocus();
-    }//GEN-LAST:event_jTextField4FocusGained
+    }//GEN-LAST:event_txtSubtotalFocusGained
 
     private void jtItensFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtItensFocusGained
         this.txtCodigo.requestFocus();
@@ -574,13 +581,13 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable jtItens;
     private javax.swing.JLabel txtAviso;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JLabel txtIdVenda;
     private javax.swing.JLabel txtNomeProduto;
     private javax.swing.JTextField txtQtd;
+    private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
@@ -617,22 +624,20 @@ public class ViewVenda extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jtItens.getModel();
         modelo.setNumRows(0);
 
-        VendaController produtoVenda = new VendaController();
+        ProdutoVendaController produtoVenda = new ProdutoVendaController();
+        int i = 0;
 
-//        for (ProdutoVenda listaProduto : produtoVenda.listaItens()) {
-//            //DefaultTable
-//            modelo.addRow(new Object[]{
-//                produto.getProdutoCodigo(),
-//                produto.getProdutoDescricao(),
-//                produto.getProdutoQuantidade(),
-//                produto.getProdutoValor(),
-//               // produto.getProdutoCategoria().getCategoriaCodigo(),
-//                produto.getProdutoCategoria().getCategoriaDescricao(),
-//                produto.getProdutoMarca().getMarcaDescricao()
-//
-//            });
-//
-//        }
+        for (ProdutoVenda listaProduto : produtoVenda.listarItensVenda(this.idVenda)) {
+            //DefaultTable
+            modelo.addRow(new Object[]{   
+                i++,
+                listaProduto.getProdutoDescricao(),
+                listaProduto.getQtd(),
+                listaProduto.getValorUnitario(),
+                listaProduto.getTotal()
+            });
 
+            this.txtSubtotal.setText(String.valueOf(produtoVenda.subtotal(this.idVenda)));
+        }                
     }
 }

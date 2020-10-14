@@ -46,11 +46,8 @@ create table situacao(
     situacaoDescricao varchar(50)
 );
 -- Popula a tabela situacao
-insert into situacao (situacaoDescricao) values ('Situacao 1');
-insert into situacao (situacaoDescricao) values ('Situacao 2');
-insert into situacao (situacaoDescricao) values ('Situacao 3');
-insert into situacao (situacaoDescricao) values ('Situacao 4');
-insert into situacao (situacaoDescricao) values ('Situacao 5');
+insert into situacao (situacaoDescricao) values ('EM ABERTO');
+insert into situacao (situacaoDescricao) values ('FINALIZADA');
 
 -- Cria a tabela produto
 create table produto(
@@ -117,7 +114,7 @@ insert into endereco (enderecoCliente, enderecoDescricao, enderecoLogradouro, en
 create table venda(
     vendaCodigo int primary key not null auto_increment,
     vendaCliente int,
-    vendaDataVenda date,
+    vendaDataVenda date default now(),
     vendaSituacao int,
     vendaEnderecoEntrega int, 
     constraint fk_nom_cliente foreign key(vendaCliente) REFERENCES cliente(clienteCodigo),
