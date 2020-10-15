@@ -25,6 +25,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private ViewNovaVenda viewNovaVenda;
     private int idCliente;
     private VendaController venda;
+    private ClienteController cliente;
     private Produto produto;
     
     //private Venda venda;
@@ -34,9 +35,7 @@ public class ViewVenda extends javax.swing.JFrame {
     public ViewVenda() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
-        this.viewNovaVenda.setVisible(true);
-        this.venda = new VendaController();
-        ClienteController cliente = new ClienteController();       
+        this.viewNovaVenda.setVisible(true);              
                
         if(viewNovaVenda.getClienteSelecionado() == -1){                                    
 //            this.setIdVenda(viewNovaVenda.getIdVenda());
@@ -45,14 +44,17 @@ public class ViewVenda extends javax.swing.JFrame {
         }else{
             initComponents();
             
+            this.venda = new VendaController();
+            this.cliente = new ClienteController();
+            
             this.setIdCliente(viewNovaVenda.getClienteSelecionado());
             this.setIdVenda(viewNovaVenda.getIdVenda());
             
             this.venda.setCliente(this.idVenda, this.idCliente);
             
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
-            setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
-            setResizable(false); // Retira o botão de Maximizar
+            this.setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
+//            this.setResizable(false); // Retira o botão de Maximizar
             
             this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
             this.txtIdVenda.setText("# "+this.getIdVenda());
@@ -112,7 +114,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         txtNomeProduto.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         txtNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtNomeProduto.setText("PROXIMO CLIENTE");
+        txtNomeProduto.setText("VENDA INICIADA");
         txtNomeProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
