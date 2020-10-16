@@ -6,7 +6,9 @@
 package view;
 
 import DAO.UsuarioDAO;
+import controller.UsuarioController;
 import javax.swing.JOptionPane;
+import model.Usuario;
 
 
 /**
@@ -14,14 +16,7 @@ import javax.swing.JOptionPane;
  * @author ARAÍ
  */
 public class ViewUsuario extends javax.swing.JFrame {
-    private Object jTextFieldUsuario;
-    private Object jPasswordFiledSenha;
-
-   
-    UsuarioDAO dao = new UsuarioDAO();
-    
-    
-    
+ 
     
     public ViewUsuario() {
         initComponents();
@@ -36,13 +31,13 @@ public class ViewUsuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordFieldSenha = new javax.swing.JPasswordField();
-        jPasswordFieldConfirmarSenha = new javax.swing.JPasswordField();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jButtonCadastrar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        txtUsuarioSenha = new javax.swing.JPasswordField();
+        txtUsuarioConfirmaSenha = new javax.swing.JPasswordField();
+        txtUsuarioNome = new javax.swing.JTextField();
+        txtUsuarioEmail = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        cbxUsuarioAdministrador = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,28 +52,28 @@ public class ViewUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Confirmar Senha:");
 
-        jPasswordFieldSenha.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuarioSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordFieldSenhaActionPerformed(evt);
+                txtUsuarioSenhaActionPerformed(evt);
             }
         });
 
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuarioNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
+                txtUsuarioNomeActionPerformed(evt);
             }
         });
 
-        jButtonCadastrar.setText("Cadastrar");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
 
-        jCheckBox1.setText("É Administrador ?");
+        cbxUsuarioAdministrador.setText("É Administrador ?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,28 +85,28 @@ public class ViewUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNome))
+                        .addComponent(txtUsuarioNome))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldEmail))
+                        .addComponent(txtUsuarioEmail))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldSenha)
-                            .addComponent(jPasswordFieldConfirmarSenha)))
+                            .addComponent(txtUsuarioSenha)
+                            .addComponent(txtUsuarioConfirmaSenha)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(cbxUsuarioAdministrador)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(122, 122, 122)
-                .addComponent(jButtonCadastrar)
+                .addComponent(btnCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCancelar)
+                .addComponent(btnCancelar)
                 .addContainerGap(124, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,25 +115,25 @@ public class ViewUsuario extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(cbxUsuarioAdministrador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastrar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
@@ -167,37 +162,41 @@ public class ViewUsuario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(440, 467));
+        setSize(new java.awt.Dimension(464, 467));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
+    private void txtUsuarioNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioNomeActionPerformed
         
-        jTextFieldNome.setEnabled(true);
-        jTextFieldEmail.setEnabled(true);
-        jPasswordFieldSenha.setEnabled(true);
-        jPasswordFieldConfirmarSenha.setEnabled(true);
+    }//GEN-LAST:event_txtUsuarioNomeActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
+        Usuario usuario = new Usuario();
+        UsuarioController usuarioController = new UsuarioController();
+        
+        usuario.setUsuarioNome(txtUsuarioNome.getText());
+        usuario.setUsuarioEmail(txtUsuarioEmail.getText());
+        usuario.setUsuarioSenha(txtUsuarioSenha.getText());
+        usuario.setUsuarioAdministrador(cbxUsuarioAdministrador.isSelected());
+        
+        if (txtUsuarioSenha.getText().equals(txtUsuarioConfirmaSenha.getText())){
+            usuarioController.inserirUsuarioController(usuario);
+            txtUsuarioNome.setText("");
+            txtUsuarioEmail.setText("");
+            txtUsuarioSenha.setText(""); 
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "As senhas nao coferem");
+        }
+        
 
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCadastrarActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jPasswordFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaActionPerformed
+    private void txtUsuarioSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
-    
-        //if(jTextFieldNome.getText().isEmpty{
-           // JOptionPane.showMessageDialog(null, "Preencha o usuário para continuar");
-            //jTextFieldNome.requestFocus();
-        //return null;
-        //}else if{
-    
-    
-//}
-    
- 
+    }//GEN-LAST:event_txtUsuarioSenhaActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -233,18 +232,18 @@ public class ViewUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCadastrar;
-    private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JCheckBox cbxUsuarioAdministrador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordFieldConfirmarSenha;
-    private javax.swing.JPasswordField jPasswordFieldSenha;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JPasswordField txtUsuarioConfirmaSenha;
+    private javax.swing.JTextField txtUsuarioEmail;
+    private javax.swing.JTextField txtUsuarioNome;
+    private javax.swing.JPasswordField txtUsuarioSenha;
     // End of variables declaration//GEN-END:variables
 }

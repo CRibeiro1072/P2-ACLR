@@ -51,8 +51,8 @@ public class ViewVenda extends javax.swing.JFrame {
             this.venda.setCliente(this.idVenda, this.idCliente);
             
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
-            setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
-            setResizable(false); // Retira o botão de Maximizar
+            this.setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
+       //     this.setResizable(false); // Retira o botão de Maximizar
             
             this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
             this.txtIdVenda.setText("# "+this.getIdVenda());
