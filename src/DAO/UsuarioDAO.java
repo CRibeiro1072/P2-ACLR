@@ -6,83 +6,202 @@
 package DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Usuario;
 
 /**
  *
- * @author ARAÍ
+ * @author claudinei
  */
 public class UsuarioDAO {
-    
-     /*  private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/mvc_dao";
-    private static final String USER = "root";
-    private static final String PASS = "123456";*/
-    
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/aclr";
-    private static final String USER = "phpmyadmin";
-    private static final String PASS = "123456";
 
-    public static Connection getConnection() {
+    private Connection con = null;
+
+    public UsuarioDAO() {
+
+        con = ConnectionDB.getConnection();
+
+    }
+
+    public boolean inserirUsuarioDAO(Usuario usuario) {
+
+        String sql = "INSERT INTO usuario (usuarioNome, usuarioEmail, usuarioSenha, usuarioAdministrador) values (?, ?, ?, ?)";
+
+        PreparedStatement stmt = null;
 
         try {
-            Class.forName(DRIVER);
 
-            return DriverManager.getConnection(URL, USER, PASS);
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, usuario.getUsuarioNome());
+            stmt.setString(2, usuario.getUsuarioEmail());
+            stmt.setString(3, usuario.getUsuarioSenha());
+            stmt.setBoolean(4, usuario.getUsuarioAdministrador());
+            stmt.executeUpdate();
 
+            return true;
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na Conexao ao BD.", ex);
+        } catch (SQLException ex) {
+            System.err.println("Erro salvarUsuarioDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
         }
     }
 
-    //Metodos de Fechamento conforme documentaçao MySql
-    //Fecha conexao
-    public static void closeConnection(Connection con) {
+    public List<Usuario> buscarUsuarioDAO() {
 
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.err.println("Erro ao fechar conexao: " + ex);
+        String sql = "SELECT * FROM usuario ORDER BY usuarioNome";
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Usuario> usuarioLista = new ArrayList<>();
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+                
+                usuario.setUsuarioCodigo(rs.getInt(Usuario.USUARIO_CODIGO));
+                usuario.setUsuarioNome(rs.getString(Usuario.USUARIO_NOME));
+                usuario.setUsuarioEmail(rs.getString(Usuario.USUARIO_EMAIL));
+                usuario.setUsuarioSenha(rs.getString(Usuario.USUARIO_SENHA));
+                usuario.setUsuarioAdministrador(rs.getBoolean(Usuario.USUARIO_ADMINISTRADOR));
+
+                usuarioLista.add(usuario);
+
             }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro buscarUsuarioDAO: " + ex);
+
+        } finally {
+            ConnectionDB.closeConnection(con, stmt, rs);
         }
 
+        return usuarioLista;
+
+    }    
+    
+    public boolean atualizarUsuarioDAO(Usuario usuario) {
+        String sql = "UPDATE usuario SET usuarioNome = ?, usuarioEmail = ?, usuarioSenha = ?, usuarioAdministrador = ? "
+                + "WHERE usuarioCodigo = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, usuario.getUsuarioNome());
+            stmt.setString(2, usuario.getUsuarioEmail());
+            stmt.setString(3, usuario.getUsuarioSenha());
+            stmt.setBoolean(4, usuario.getUsuarioAdministrador());
+            stmt.setInt(5, usuario.getUsuarioCodigo());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro atualizarUsuarioDAO: " + ex);
+            return false;
+        } finally {
+            ConnectionDB.closeConnection(con, stmt);
+        }
     }
+        
+    public boolean excluirUsuarioDAO(Usuario usuario) {
 
-    //Fecha conexao, e PreparedStatement
-    public static void closeConnection(Connection con, PreparedStatement stmt) {
+        String sql = "DELETE FROM usuario WHERE usuarioCodigo = ?";
 
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException ex) {
-                System.err.println("Erro ao fechar conexao e stmt: " + ex);
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, usuario.getUsuarioCodigo());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro excluirUsuarioDAO: " + ex);
+            return false;
+        } finally {
+            ConnectionDB.closeConnection(con, stmt);
+        }
+    }     
+    
+    public List<Usuario> buscarUsuarioComLikeDAO(String usuarioNome) {
+
+        String sql = "SELECT * FROM usuario WHERE usuarioNome LIKE ? ORDER BY usuarioNome ";
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Usuario> usuarioLista = new ArrayList<>();
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + usuarioNome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioCodigo(rs.getInt(Usuario.USUARIO_CODIGO));
+                usuario.setUsuarioNome(rs.getString(usuario.USUARIO_NOME));
+                usuario.setUsuarioEmail(rs.getString(usuario.USUARIO_EMAIL));
+                usuario.setUsuarioSenha(rs.getString(usuario.USUARIO_SENHA));
+                usuario.setUsuarioAdministrador(rs.getBoolean(usuario.USUARIO_ADMINISTRADOR));
+
+                usuarioLista.add(usuario);
+
             }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro buscarUsuarioDAOComLike: " + ex);
+
+        } finally {
+            ConnectionDB.closeConnection(con, stmt, rs);
         }
 
-        closeConnection(con);
+        return usuarioLista;
 
     }
+    
+    public boolean usuarioLoginDAO(String usuarioEmail, String usuarioSenha) {
 
-    //Fecha conexao, e PreparedStatement e ResultSet
-    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs) {
+        String sql = "SELECT usuarioEmail, usuarioSenha FROM usuario WHERE usuarioEmail = ? AND usuarioSenha = ?";
 
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException ex) {
-                System.err.println("Erro ao fechar conexao, stmt e rs: " + ex);
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        boolean check = false;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, usuarioEmail);
+            stmt.setString(2, usuarioSenha);
+            rs = stmt.executeQuery();
+            
+            if (rs.next()){
+                check = true;
             }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro ao logar usuario: " + ex);
+
+        } finally {
+            ConnectionDB.closeConnection(con, stmt, rs);
         }
-        closeConnection(con, stmt);
+
+        return check;
 
     }
-
-}
     
 
+
+}
