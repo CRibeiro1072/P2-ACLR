@@ -18,7 +18,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     public ViewPrincipal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
-        setResizable(false); // Retira o botão de Maximizar
+        setResizable(false); // Retira o botão de Maximizar        
         
     }
     
@@ -42,6 +42,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
+        jBRelatorios = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -110,6 +111,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jBRelatorios.setText("Relatorios");
+        jBRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRelatoriosActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setToolTipText("");
 
         jMenu1.setText("Arquivo");
@@ -141,6 +149,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -156,7 +166,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
                         .addComponent(jBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jBMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jBSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,10 +181,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewVenda viewVenda = new ViewVenda();   
         viewVenda.setVisible(true);
         
-        if(viewVenda.getIdVenda() == -1){
+        if(viewVenda.getIdCliente() == -1){
             VendaController venda = new VendaController();
-            venda.anulada(viewVenda.getIdVenda());                        
+            venda.anulada(viewVenda.getIdVenda());
         }
+        
+        
     }//GEN-LAST:event_jBVenderActionPerformed
 
     private void jBProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProdutosActionPerformed
@@ -200,6 +213,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewUsuario viewUsuario = new ViewUsuario();
         viewUsuario.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jBRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatoriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBRelatoriosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +257,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBCategorias;
     private javax.swing.JButton jBMarcas;
     private javax.swing.JButton jBProdutos;
+    private javax.swing.JButton jBRelatorios;
     private javax.swing.JButton jBSair;
     private javax.swing.JButton jBVender;
     private javax.swing.JButton jButton5;

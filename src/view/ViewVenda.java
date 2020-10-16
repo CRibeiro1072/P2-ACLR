@@ -23,10 +23,11 @@ public class ViewVenda extends javax.swing.JFrame {
     private int idVenda = -1;
     private ViewSetQtdProduto viewSetQtdProduto;
     private ViewNovaVenda viewNovaVenda;
-    private int idCliente;
+    private int idCliente = -1;
     private VendaController venda;
     private ClienteController cliente;
     private Produto produto;
+    
     
     //private Venda venda;
     /**
@@ -34,11 +35,12 @@ public class ViewVenda extends javax.swing.JFrame {
      */
     public ViewVenda() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setUndecorated(true);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
         this.viewNovaVenda.setVisible(true);              
                
         if(viewNovaVenda.getClienteSelecionado() == -1){                                    
-//            this.setIdVenda(viewNovaVenda.getIdVenda());
+            this.setIdVenda(viewNovaVenda.getIdVenda());
             this.dispose();
         
         }else{
@@ -470,6 +472,15 @@ public class ViewVenda extends javax.swing.JFrame {
         if(evt.getKeyCode() == KeyEvent.VK_F1) {
             this.viewSetQtdProduto.setVisible(true);
             this.txtQtd.setText(String.valueOf(this.viewSetQtdProduto.getQtdDialog()));
+        }
+        
+        if(evt.getKeyCode() == KeyEvent.VK_F3) {
+            int op = JOptionPane.showConfirmDialog(this, "Você realmente deseja finalizar a venda atual?");
+            
+            if(op == JOptionPane.YES_OPTION){
+                venda.finalizar(this.idVenda);                
+                this.dispose();
+            }
         }
         
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
