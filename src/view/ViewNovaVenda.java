@@ -26,7 +26,7 @@ public class ViewNovaVenda extends javax.swing.JDialog {
     
     public ViewNovaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setUndecorated(true);
+        this.setUndecorated(true);        
         initComponents();
         
         VendaController venda = new VendaController(); 
