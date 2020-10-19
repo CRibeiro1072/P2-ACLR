@@ -35,17 +35,4 @@ public class VendaController {
         return venda.setCliente(idVenda, idCliente);
     }
     
-    public void finalizar(int idVenda){
-        VendaDAO venda1 = new VendaDAO();
-        
-        if(venda1.ehVendaVazia(idVenda)){
-            VendaDAO venda2 = new VendaDAO();
-            venda2.anulada(idVenda);
-        }
-        else{
-            VendaDAO venda2 = new VendaDAO();
-            venda2.finalizar(idVenda);
-        }
-    }
-    
 }

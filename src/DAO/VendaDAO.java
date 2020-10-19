@@ -80,7 +80,7 @@ public class VendaDAO {
         }
     }
     
-    public boolean anulada(int idVenda){
+    public boolean anulada(int id){
         String sql = "DELETE FROM venda WHERE vendaCodigo = ?";
 
         PreparedStatement stmt = null;
@@ -88,7 +88,7 @@ public class VendaDAO {
         try {
 
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idVenda);
+            stmt.setInt(1, id);
             stmt.execute();                       
 
             return true;
@@ -128,64 +128,4 @@ public class VendaDAO {
 
         }
     }
-    
-    public boolean finalizar(int idVenda){
-        String sql = "UPDATE venda SET vendaSituacao = 2 WHERE vendaCodigo = ?";
-
-        PreparedStatement stmt = null;
-
-        try {
-
-            stmt = con.prepareStatement(sql);            
-            stmt.setInt(1, idVenda);
-            stmt.execute();                       
-
-            return true;
-
-        } catch (SQLException ex) {
-            System.err.println("Erro finalizarDAO: " + ex);
-            return false;
-
-        } finally {
-
-            ConnectionDB.closeConnection(con, stmt);
-
-        }
-    }
-
-    public boolean ehVendaVazia (int idVenda) {
-        
-        String sql = "SELECT COUNT(vendaCodigo) as qtd FROM venda_produto WHERE vendaCodigo = ?";                
-
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idVenda);
-            rs = stmt.executeQuery();
-            
-            if(rs.next()){
-                if(rs.getInt("qtd") > 0){
-                    return false;
-                }else{
-                    return true;
-                }
-            }else{
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            System.err.println("Erro ehVendaVaziaDAO: " + ex);
-            return false;
-
-        } finally {
-
-            ConnectionDB.closeConnection(con, stmt);
-
-        }
-    }
-
-    
 }

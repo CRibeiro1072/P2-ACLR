@@ -23,11 +23,9 @@ public class ViewVenda extends javax.swing.JFrame {
     private int idVenda = -1;
     private ViewSetQtdProduto viewSetQtdProduto;
     private ViewNovaVenda viewNovaVenda;
-    private int idCliente = -1;
+    private int idCliente;
     private VendaController venda;
-    private ClienteController cliente;
     private Produto produto;
-    
     
     //private Venda venda;
     /**
@@ -35,19 +33,17 @@ public class ViewVenda extends javax.swing.JFrame {
      */
     public ViewVenda() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setUndecorated(true);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
-        this.viewNovaVenda.setVisible(true);              
+        this.viewNovaVenda.setVisible(true);
+        this.venda = new VendaController();
+        ClienteController cliente = new ClienteController();       
                
         if(viewNovaVenda.getClienteSelecionado() == -1){                                    
-            this.setIdVenda(viewNovaVenda.getIdVenda());
+//            this.setIdVenda(viewNovaVenda.getIdVenda());
             this.dispose();
         
         }else{
             initComponents();
-            
-            this.venda = new VendaController();
-            this.cliente = new ClienteController();
             
             this.setIdCliente(viewNovaVenda.getClienteSelecionado());
             this.setIdVenda(viewNovaVenda.getIdVenda());
@@ -56,6 +52,7 @@ public class ViewVenda extends javax.swing.JFrame {
             
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
             this.setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
+       //     this.setResizable(false); // Retira o botão de Maximizar
             
             this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
             this.txtIdVenda.setText("# "+this.getIdVenda());
@@ -101,6 +98,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnFinalizarVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -115,7 +113,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         txtNomeProduto.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         txtNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtNomeProduto.setText("VENDA INICIADA");
+        txtNomeProduto.setText("PROXIMO CLIENTE");
         txtNomeProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -378,6 +376,8 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jLabel11.setText("F1 - EDITAR QUANTIDADE");
 
+        btnFinalizarVenda.setText("Finalizar Venda");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -390,11 +390,17 @@ public class ViewVenda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(171, 171, 171))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFinalizarVenda)
+                .addGap(133, 133, 133))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(14, 14, 14)
+                .addComponent(btnFinalizarVenda)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel9)
@@ -471,15 +477,6 @@ public class ViewVenda extends javax.swing.JFrame {
         if(evt.getKeyCode() == KeyEvent.VK_F1) {
             this.viewSetQtdProduto.setVisible(true);
             this.txtQtd.setText(String.valueOf(this.viewSetQtdProduto.getQtdDialog()));
-        }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_F3) {
-            int op = JOptionPane.showConfirmDialog(this, "Você realmente deseja finalizar a venda atual?");
-            
-            if(op == JOptionPane.YES_OPTION){
-                venda.finalizar(this.idVenda);                
-                this.dispose();
-            }
         }
         
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -575,6 +572,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizarVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

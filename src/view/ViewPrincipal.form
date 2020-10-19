@@ -52,18 +52,20 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jBVender" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBProdutos" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBCategorias" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBMarcas" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCadastroSituacao" min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCadastroEndereco" min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton5" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton6" min="-2" pref="109" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jBRelatorios" min="-2" pref="109" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jBSair" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
@@ -82,9 +84,10 @@
                       <Component id="jBProdutos" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="jBCategorias" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="jBMarcas" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="btnCadastroSituacao" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="btnCadastroEndereco" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="jButton5" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="jButton6" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
-                      <Component id="jBRelatorios" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jBSair" max="32767" attributes="0"/>
               </Group>
@@ -106,7 +109,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator1" pref="1047" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" pref="1068" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -115,7 +118,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="421" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="430" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -178,12 +181,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSairActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBRelatorios">
+    <Component class="javax.swing.JButton" name="btnCadastroSituacao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Relatorios"/>
+        <Property name="text" type="java.lang.String" value="Situacoes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBRelatoriosActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroSituacaoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCadastroEndereco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enderecos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroEnderecoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
