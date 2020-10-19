@@ -6,6 +6,7 @@
 package view;
 
 import DAO.UsuarioDAO;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,12 +49,24 @@ public class ViewLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Login:");
 
+        txtUsuarioLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioLoginKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Senha:");
 
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
+            }
+        });
+
+        txtUsuarioSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioSenhaKeyPressed(evt);
             }
         });
 
@@ -132,6 +145,18 @@ public class ViewLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario nao cadastrado!");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtUsuarioSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnEntrar.doClick();
+        }
+    }//GEN-LAST:event_txtUsuarioSenhaKeyPressed
+
+    private void txtUsuarioLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioLoginKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnEntrar.doClick();
+        }
+    }//GEN-LAST:event_txtUsuarioLoginKeyPressed
 
     /**
      * @param args the command line arguments
