@@ -18,7 +18,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     public ViewPrincipal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
-        setResizable(false); // Retira o botão de Maximizar        
+        setResizable(false); // Retira o botão de Maximizar
         
     }
     
@@ -42,7 +42,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        jBRelatorios = new javax.swing.JButton();
+        btnCadastroSituacao = new javax.swing.JButton();
+        btnCadastroEndereco = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -57,14 +58,14 @@ public class ViewPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 421, Short.MAX_VALUE))
+                .addGap(0, 430, Short.MAX_VALUE))
         );
 
         jBVender.setText("Vender");
@@ -111,10 +112,17 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jBRelatorios.setText("Relatorios");
-        jBRelatorios.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastroSituacao.setText("Situacoes");
+        btnCadastroSituacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBRelatoriosActionPerformed(evt);
+                btnCadastroSituacaoActionPerformed(evt);
+            }
+        });
+
+        btnCadastroEndereco.setText("Enderecos");
+        btnCadastroEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroEnderecoActionPerformed(evt);
             }
         });
 
@@ -139,18 +147,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBVender, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastroSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastroEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -165,9 +175,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
                         .addComponent(jBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jBMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastroSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastroEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jBSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -181,12 +192,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewVenda viewVenda = new ViewVenda();   
         viewVenda.setVisible(true);
         
-        if(viewVenda.getIdCliente() == -1){
+        if(viewVenda.getIdVenda() == -1){
             VendaController venda = new VendaController();
-            venda.anulada(viewVenda.getIdVenda());
+            venda.anulada(viewVenda.getIdVenda());                        
         }
-        
-        
     }//GEN-LAST:event_jBVenderActionPerformed
 
     private void jBProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProdutosActionPerformed
@@ -214,9 +223,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
         viewUsuario.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jBRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatoriosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBRelatoriosActionPerformed
+    private void btnCadastroSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroSituacaoActionPerformed
+        ViewSituacao viewSituacao = new ViewSituacao();
+        viewSituacao.setVisible(true);
+    }//GEN-LAST:event_btnCadastroSituacaoActionPerformed
+
+    private void btnCadastroEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroEnderecoActionPerformed
+        ViewEndereco viewEndereco = new ViewEndereco();
+        viewEndereco.setVisible(true);
+    }//GEN-LAST:event_btnCadastroEnderecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,10 +269,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastroEndereco;
+    private javax.swing.JButton btnCadastroSituacao;
     private javax.swing.JButton jBCategorias;
     private javax.swing.JButton jBMarcas;
     private javax.swing.JButton jBProdutos;
-    private javax.swing.JButton jBRelatorios;
     private javax.swing.JButton jBSair;
     private javax.swing.JButton jBVender;
     private javax.swing.JButton jButton5;

@@ -26,7 +26,6 @@ public class ViewNovaVenda extends javax.swing.JDialog {
     
     public ViewNovaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.setUndecorated(true);        
         initComponents();
         
         VendaController venda = new VendaController(); 
@@ -34,7 +33,7 @@ public class ViewNovaVenda extends javax.swing.JDialog {
         //System.out.println(idVenda);
         txtIdVenda.setText(String.valueOf(this.getIdVenda()));
         
-        atualizarTabela(); 
+        atualizarTabela();
     }
     
     public void atualizarTabela() {
