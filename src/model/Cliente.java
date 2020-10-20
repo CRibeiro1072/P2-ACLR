@@ -16,7 +16,6 @@ public class Cliente {
     public static final String CLIENTE_TELEFONE = "clienteTelefone";
     public static final String CLIENTE_CELULAR = "clienteCelular";
     public static final String CLIENTE_EMAIL = "clienteEmail";
-    public static final String CLIENTE_SENHA = "clienteSenha";
     public static final String CLIENTE_DTNASCIMENTO = "clienteDtNascimento";
     
     private int clienteCodigo;
@@ -25,7 +24,6 @@ public class Cliente {
     private String clienteTelefone;
     private String clienteCelular;
     private String clienteEmail;
-    private String clienteSenha;
     private String clienteDtNascimento;
 
     public Cliente() {
@@ -77,14 +75,6 @@ public class Cliente {
 
     public void setClienteEmail(String clienteEmail) {
         this.clienteEmail = clienteEmail;
-    }
-
-    public String getClienteSenha() {
-        return clienteSenha;
-    }
-
-    public void setClienteSenha(String clienteSenha) {
-        this.clienteSenha = clienteSenha;
     }
 
     public String getClienteDtNascimento() {

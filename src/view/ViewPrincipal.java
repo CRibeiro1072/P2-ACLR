@@ -97,6 +97,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
 
         jButton5.setText("Clientes");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Usuários");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +237,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewEndereco viewEndereco = new ViewEndereco();
         viewEndereco.setVisible(true);
     }//GEN-LAST:event_btnCadastroEnderecoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ViewCliente viewCliente = new ViewCliente();
+        viewCliente.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

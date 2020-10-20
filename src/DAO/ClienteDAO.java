@@ -28,6 +28,43 @@ public class ClienteDAO {
 
     }
     
+    public boolean inserirClienteDAO(Cliente cliente) {
+
+        String sql = "INSERT INTO cliente (clienteNome, "
+                + "clienteCpf, "
+                + "clienteTelefone, "
+                + "clienteCelular, "
+                + "clienteEmail, "
+                + "clienteDtNascimento) "
+                + "values (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, cliente.getClienteNome());
+            stmt.setString(2, cliente.getClienteCpf());
+            stmt.setString(3, cliente.getClienteTelefone());
+            stmt.setString(4, cliente.getClienteCelular());
+            stmt.setString(5, cliente.getClienteEmail());
+            stmt.setString(6, cliente.getClienteDtNascimento());
+            stmt.executeUpdate();                      
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.err.println("Erro salvarClienteDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+
+    }
+    
     public List<Cliente> buscarClienteDAO() {
 
         String sql = "SELECT * FROM cliente ORDER BY clienteNome";
@@ -45,12 +82,14 @@ public class ClienteDAO {
             while (rs.next()) {
 
                 Cliente cliente = new Cliente();
-
-                //categoria.setCategoriaCodigo(rs.getInt("categoriaCodigo"));
-                //categoria.setCategoriaDescricao(rs.getString("categoriaDescricao"));
                 
                 cliente.setClienteCodigo(rs.getInt(Cliente.CLIENTE_CODIGO));
                 cliente.setClienteNome(rs.getString(Cliente.CLIENTE_NOME));
+                cliente.setClienteCpf(rs.getString(Cliente.CLIENTE_CPF));
+                cliente.setClienteTelefone(rs.getString(Cliente.CLIENTE_TELEFONE));
+                cliente.setClienteCelular(rs.getString(Cliente.CLIENTE_CELULAR));
+                cliente.setClienteEmail(rs.getString(Cliente.CLIENTE_EMAIL));
+                cliente.setClienteDtNascimento(rs.getString(Cliente.CLIENTE_DTNASCIMENTO));
 
                 clienteLista.add(cliente);
 
@@ -85,8 +124,14 @@ public class ClienteDAO {
             while (rs.next()) {
 
                 Cliente cliente = new Cliente();
+
                 cliente.setClienteCodigo(rs.getInt(Cliente.CLIENTE_CODIGO));
                 cliente.setClienteNome(rs.getString(Cliente.CLIENTE_NOME));
+                cliente.setClienteCpf(rs.getString(Cliente.CLIENTE_CPF));
+                cliente.setClienteTelefone(rs.getString(Cliente.CLIENTE_TELEFONE));
+                cliente.setClienteCelular(rs.getString(Cliente.CLIENTE_CELULAR));
+                cliente.setClienteEmail(rs.getString(Cliente.CLIENTE_EMAIL));
+                cliente.setClienteDtNascimento(rs.getString(Cliente.CLIENTE_DTNASCIMENTO));
 
                 clienteLista.add(cliente);
 
@@ -102,6 +147,68 @@ public class ClienteDAO {
         return clienteLista;
 
     }    
+    
+ public boolean atualizarClienteDAO(Cliente cliente) {
+
+        String sql = "UPDATE cliente SET clienteNome = ?, clienteCpf = ?, "
+                    +"clienteTelefone = ?, clienteCelular = ?, clienteEmail = ?, "
+                    +"clienteDtNascimento = ? WHERE clienteCodigo = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, cliente.getClienteNome());
+            stmt.setString(2, cliente.getClienteCpf());
+            stmt.setString(3, cliente.getClienteTelefone());
+            stmt.setString(4, cliente.getClienteCelular());
+            stmt.setString(5, cliente.getClienteEmail());
+            stmt.setString(6, cliente.getClienteDtNascimento());
+            stmt.setInt(7, cliente.getClienteCodigo());
+            stmt.executeUpdate();
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.err.println("Erro atualizarClienteDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+
+    }
+
+    public boolean excluirClienteDAO(Cliente cliente) {
+
+        String sql = "DELETE FROM cliente WHERE clienteCodigo = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, cliente.getClienteCodigo());
+            stmt.executeUpdate();
+           
+            return true;
+
+        } catch (SQLException ex) {
+            System.err.println("Erro excluirClienteDAO: " + ex);
+            return false;
+
+        } finally {
+
+            ConnectionDB.closeConnection(con, stmt);
+
+        }
+    }    
+    
+    
+    
 
     public String getNomeCliente(int id) {
         ResultSet rs = null;

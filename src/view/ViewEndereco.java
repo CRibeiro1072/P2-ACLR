@@ -593,23 +593,35 @@ public class ViewEndereco extends javax.swing.JFrame {
 
     private void jtEnderecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEnderecoKeyReleased
         if (jtEndereco.getSelectedRow() != -1) {
-          /*  txtEnderecoCodigo.setText(jtEndereco.getValueAt(
+            txtEnderecoCodigo.setText(jtEndereco.getValueAt(
                     jtEndereco.getSelectedRow(), 0).toString());
             
-            txtEnderecoDescricao.setText(jtEndereco.getValueAt(
+            cbxEnderecoCliente.setSelectedItem(jtEndereco.getValueAt(
                     jtEndereco.getSelectedRow(), 1).toString());
             
-            txtEnderecoLogradouro.setText(jtEndereco.getValueAt(
+            txtEnderecoDescricao.setText(jtEndereco.getValueAt(
                     jtEndereco.getSelectedRow(), 2).toString());
             
-            txtEnderecoNumero.setText(jtEndereco.getValueAt(
+            txtEnderecoLogradouro.setText(jtEndereco.getValueAt(
                     jtEndereco.getSelectedRow(), 3).toString());
             
-            cbxEnderecoCliente.setSelectedItem(jtEndereco.getValueAt(
+            txtEnderecoNumero.setText(jtEndereco.getValueAt(
                     jtEndereco.getSelectedRow(), 4).toString());
             
-            cbxProdutoMarca.setSelectedItem(jtEndereco.getValueAt(
-                    jtEndereco.getSelectedRow(), 5).toString());*/
+            txtEnderecoComplemento.setText(jtEndereco.getValueAt(
+                    jtEndereco.getSelectedRow(), 5).toString());
+            
+            txtEnderecoCep.setText(jtEndereco.getValueAt(
+                    jtEndereco.getSelectedRow(), 6).toString());
+            
+            txtEnderecoBairro.setText(jtEndereco.getValueAt(
+                    jtEndereco.getSelectedRow(), 7).toString());
+            
+            txtEnderecoCidade.setText(jtEndereco.getValueAt(
+                    jtEndereco.getSelectedRow(), 8).toString());
+            
+            txtEnderecoUf.setText(jtEndereco.getValueAt(
+                    jtEndereco.getSelectedRow(), 9).toString());  
         }
     }//GEN-LAST:event_jtEnderecoKeyReleased
 

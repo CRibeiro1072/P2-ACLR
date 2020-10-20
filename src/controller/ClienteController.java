@@ -8,12 +8,24 @@ package controller;
 import java.util.List;
 import model.Cliente;
 import DAO.ClienteDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author romildo
  */
 public class ClienteController {
+    
+    public void inserirClienteController(Cliente cliente) {
+
+        ClienteDAO clienteDAO = new ClienteDAO();
+
+        if (clienteDAO.inserirClienteDAO(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Cliente!");
+        }
+    }
     
     public List<Cliente> buscarClienteController() {
 
@@ -25,6 +37,28 @@ public class ClienteController {
 
         ClienteDAO clienteDAO = new ClienteDAO();
         return clienteDAO.buscarClienteComLikeDAO(clienteNome);
+    }
+    
+    public void excluirClienteController(Cliente cliente) {
+
+        ClienteDAO clienteDAO = new ClienteDAO();
+
+        if (clienteDAO.excluirClienteDAO(cliente)) {
+           JOptionPane.showMessageDialog(null, "Cliente escluido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir Cliente!");
+        }
+    }
+
+    public void atualizarlienteController(Cliente cliente) {
+
+        ClienteDAO clienteDAO = new ClienteDAO();
+
+        if (clienteDAO.atualizarClienteDAO(cliente)) {
+           JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Cliente!");
+        }
     }
     
     public String getNomeCliente(int id){
