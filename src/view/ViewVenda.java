@@ -23,9 +23,11 @@ public class ViewVenda extends javax.swing.JFrame {
     private int idVenda = -1;
     private ViewSetQtdProduto viewSetQtdProduto;
     private ViewNovaVenda viewNovaVenda;
-    private int idCliente;
+    private int idCliente = -1;
     private VendaController venda;
+    private ClienteController cliente;
     private Produto produto;
+    
     
     //private Venda venda;
     /**
@@ -33,17 +35,19 @@ public class ViewVenda extends javax.swing.JFrame {
      */
     public ViewVenda() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setUndecorated(true);
         this.viewNovaVenda = new ViewNovaVenda(this, true);             
-        this.viewNovaVenda.setVisible(true);
-        this.venda = new VendaController();
-        ClienteController cliente = new ClienteController();       
+        this.viewNovaVenda.setVisible(true);              
                
         if(viewNovaVenda.getClienteSelecionado() == -1){                                    
-//            this.setIdVenda(viewNovaVenda.getIdVenda());
+            this.setIdVenda(viewNovaVenda.getIdVenda());
             this.dispose();
         
         }else{
             initComponents();
+            
+            this.venda = new VendaController();
+            this.cliente = new ClienteController();
             
             this.setIdCliente(viewNovaVenda.getClienteSelecionado());
             this.setIdVenda(viewNovaVenda.getIdVenda());
@@ -52,7 +56,7 @@ public class ViewVenda extends javax.swing.JFrame {
             
             this.viewSetQtdProduto = new ViewSetQtdProduto(this, true);
             this.setExtendedState(MAXIMIZED_BOTH); // Inicia a tela Maximizada
-       //     this.setResizable(false); // Retira o botão de Maximizar
+//            this.setResizable(false); // Retira o botão de Maximizar
             
             this.txtAviso.setText(cliente.getNomeCliente(viewNovaVenda.getClienteSelecionado()));
             this.txtIdVenda.setText("# "+this.getIdVenda());
@@ -112,7 +116,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         txtNomeProduto.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         txtNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtNomeProduto.setText("PROXIMO CLIENTE");
+        txtNomeProduto.setText("VENDA INICIADA");
         txtNomeProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -382,9 +386,9 @@ public class ViewVenda extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(171, 171, 171))
         );
@@ -468,6 +472,15 @@ public class ViewVenda extends javax.swing.JFrame {
         if(evt.getKeyCode() == KeyEvent.VK_F1) {
             this.viewSetQtdProduto.setVisible(true);
             this.txtQtd.setText(String.valueOf(this.viewSetQtdProduto.getQtdDialog()));
+        }
+        
+        if(evt.getKeyCode() == KeyEvent.VK_F3) {
+            int op = JOptionPane.showConfirmDialog(this, "Você realmente deseja finalizar a venda atual?");
+            
+            if(op == JOptionPane.YES_OPTION){
+                venda.finalizar(this.idVenda);                
+                this.dispose();
+            }
         }
         
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
