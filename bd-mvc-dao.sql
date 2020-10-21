@@ -73,16 +73,16 @@ create table cliente(
     clienteNome varchar(100), 
     clienteCpf varchar(15),
     clienteTelefone varchar(15),
-    clienteCeleular varchar(15),
+    clienteCelular varchar(15),
     clienteEmail varchar(100),
     clienteDtNascimento date
 );
 -- Popula a tabela cliente
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 1', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente1@gmail.com', '2020-10-05');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 2', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente2@gmail.com', '2020-10-05');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 3', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente3@gmail.com', '2020-10-05');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 4', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente4@gmail.com', '2020-10-05');
-insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCeleular, clienteEmail,  clienteDtNascimento ) values ('Cliente 5', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente5@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCelular, clienteEmail,  clienteDtNascimento ) values ('Cliente 1', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente1@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCelular, clienteEmail,  clienteDtNascimento ) values ('Cliente 2', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente2@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCelular, clienteEmail,  clienteDtNascimento ) values ('Cliente 3', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente3@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCelular, clienteEmail,  clienteDtNascimento ) values ('Cliente 4', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente4@gmail.com', '2020-10-05');
+insert into cliente (clienteNome, clienteCpf, clienteTelefone, clienteCelular, clienteEmail,  clienteDtNascimento ) values ('Cliente 5', '111.111.111-11', '(11)11111-11111', '(11)11111-1111', 'Cliente5@gmail.com', '2020-10-05');
 
 -- Cria a tabela endereco
 create table endereco(
@@ -116,7 +116,7 @@ create table venda(
     vendaCliente int,
     vendaDataVenda date default now(),
     vendaSituacao int,
-    vendaEnderecoEntrega int, 
+    vendaEnderecoEntrega int,
     constraint fk_nom_cliente foreign key(vendaCliente) REFERENCES cliente(clienteCodigo),
     constraint fk_end_entrega_cliente foreign key(vendaEnderecoEntrega) REFERENCES endereco(enderecoCodigo)
 );
